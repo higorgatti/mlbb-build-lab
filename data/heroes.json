@@ -1,0 +1,678 @@
+[
+  {
+    "id": "layla",
+    "nome": "Layla",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 120,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "miya",
+    "nome": "Miya",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 118,
+      "poderMagico": 0,
+      "velAtaque": 0.93,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "clint",
+    "nome": "Clint",
+    "classe": "Atirador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 125,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "irithel",
+    "nome": "Irithel",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 120,
+      "poderMagico": 0,
+      "velAtaque": 0.95,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "brody",
+    "nome": "Brody",
+    "classe": "Atirador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 123,
+      "poderMagico": 0,
+      "velAtaque": 0.84,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "lesley",
+    "nome": "Lesley",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 121,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "moskov",
+    "nome": "Moskov",
+    "classe": "Atirador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 119,
+      "poderMagico": 0,
+      "velAtaque": 0.95,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "karrie",
+    "nome": "Karrie",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 116,
+      "poderMagico": 0,
+      "velAtaque": 1.02,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "hanabi",
+    "nome": "Hanabi",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 117,
+      "poderMagico": 0,
+      "velAtaque": 0.96,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "beatrix",
+    "nome": "Beatrix",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 122,
+      "poderMagico": 0,
+      "velAtaque": 0.92,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "natan",
+    "nome": "Natan",
+    "classe": "Atirador",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 115,
+      "poderMagico": 0,
+      "velAtaque": 0.94,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "ixia",
+    "nome": "Ixia",
+    "classe": "Atiradora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 120,
+      "poderMagico": 0,
+      "velAtaque": 0.95,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "bruno",
+    "nome": "Bruno",
+    "classe": "Atirador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 124,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "kimmy",
+    "nome": "Kimmy",
+    "classe": "Atiradora",
+    "tipoDano": "Híbrido",
+    "base": {
+      "ataque": 110,
+      "poderMagico": 30,
+      "velAtaque": 0.96,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "eudora",
+    "nome": "Eudora",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 115,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "cyclops",
+    "nome": "Cyclops",
+    "classe": "Mago",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 114,
+      "poderMagico": 0,
+      "velAtaque": 0.88,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "lylia",
+    "nome": "Lylia",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.94,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "lunox",
+    "nome": "Lunox",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 113,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "vale",
+    "nome": "Vale",
+    "classe": "Mago",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 114,
+      "poderMagico": 0,
+      "velAtaque": 0.88,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "harith",
+    "nome": "Harith",
+    "classe": "Mago",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 116,
+      "poderMagico": 0,
+      "velAtaque": 0.98,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "esmeralda",
+    "nome": "Esmeralda",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 118,
+      "poderMagico": 0,
+      "velAtaque": 0.92,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "selena",
+    "nome": "Selena",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "kagura",
+    "nome": "Kagura",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 116,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "odette",
+    "nome": "Odette",
+    "classe": "Maga",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 114,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "cecilion",
+    "nome": "Cecilion",
+    "classe": "Mago",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "hayabusa",
+    "nome": "Hayabusa",
+    "classe": "Assassino",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 121,
+      "poderMagico": 0,
+      "velAtaque": 1.02,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "ling",
+    "nome": "Ling",
+    "classe": "Assassino",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 122,
+      "poderMagico": 0,
+      "velAtaque": 1.04,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "fanny",
+    "nome": "Fanny",
+    "classe": "Assassina",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 124,
+      "poderMagico": 0,
+      "velAtaque": 1.05,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "helcurt",
+    "nome": "Helcurt",
+    "classe": "Assassino",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 122,
+      "poderMagico": 0,
+      "velAtaque": 1.02,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "gusion",
+    "nome": "Gusion",
+    "classe": "Assassino",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 118,
+      "poderMagico": 0,
+      "velAtaque": 1.02,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "lancelot",
+    "nome": "Lancelot",
+    "classe": "Assassino",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 123,
+      "poderMagico": 0,
+      "velAtaque": 1.0,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "saber",
+    "nome": "Saber",
+    "classe": "Assassino",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 120,
+      "poderMagico": 0,
+      "velAtaque": 1.0,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "karina",
+    "nome": "Karina",
+    "classe": "Assassina",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 118,
+      "poderMagico": 0,
+      "velAtaque": 1.0,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "alucard",
+    "nome": "Alucard",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 125,
+      "poderMagico": 0,
+      "velAtaque": 0.95,
+      "crit": 0,
+      "vampFisico": 0.05
+    }
+  },
+  {
+    "id": "zilong",
+    "nome": "Zilong",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 124,
+      "poderMagico": 0,
+      "velAtaque": 0.98,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "balmond",
+    "nome": "Balmond",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 122,
+      "poderMagico": 0,
+      "velAtaque": 0.92,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "chou",
+    "nome": "Chou",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 123,
+      "poderMagico": 0,
+      "velAtaque": 0.98,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "leomord",
+    "nome": "Leomord",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 124,
+      "poderMagico": 0,
+      "velAtaque": 0.96,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "paquito",
+    "nome": "Paquito",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 122,
+      "poderMagico": 0,
+      "velAtaque": 1.02,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "martis",
+    "nome": "Martis",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 122,
+      "poderMagico": 0,
+      "velAtaque": 1.0,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "dyrroth",
+    "nome": "Dyrroth",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 124,
+      "poderMagico": 0,
+      "velAtaque": 1.0,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "masha",
+    "nome": "Masha",
+    "classe": "Lutadora",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 120,
+      "poderMagico": 0,
+      "velAtaque": 1.06,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "x-borg",
+    "nome": "X.Borg",
+    "classe": "Lutador",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 121,
+      "poderMagico": 0,
+      "velAtaque": 0.96,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "tigreal",
+    "nome": "Tigreal",
+    "classe": "Tanque",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 110,
+      "poderMagico": 0,
+      "velAtaque": 0.84,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "johnson",
+    "nome": "Johnson",
+    "classe": "Tanque",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "gatotkaca",
+    "nome": "Gatotkaca",
+    "classe": "Tanque",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 113,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "uranus",
+    "nome": "Uranus",
+    "classe": "Tanque",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "lolita",
+    "nome": "Lolita",
+    "classe": "Tanque",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 111,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "belerick",
+    "nome": "Belerick",
+    "classe": "Tanque",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 110,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "akai",
+    "nome": "Akai",
+    "classe": "Tanque",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.9,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "hylos",
+    "nome": "Hylos",
+    "classe": "Tanque",
+    "tipoDano": "Mágico",
+    "base": {
+      "ataque": 110,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  },
+  {
+    "id": "minotauro",
+    "nome": "Minotauro",
+    "classe": "Tanque",
+    "tipoDano": "Físico",
+    "base": {
+      "ataque": 112,
+      "poderMagico": 0,
+      "velAtaque": 0.86,
+      "crit": 0,
+      "vampFisico": 0
+    }
+  }
+]

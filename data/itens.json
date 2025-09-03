@@ -1,0 +1,255 @@
+[
+  {
+    "id": "lamina-do-desespero",
+    "nome": "Lâmina do Desespero",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 160
+    }
+  },
+  {
+    "id": "espada-do-cacador-de-demonios",
+    "nome": "Espada do Caçador de Demônios",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 35,
+      "velAtaque": 0.25,
+      "vampFisico": 0.1
+    }
+  },
+  {
+    "id": "furia-do-berserker",
+    "nome": "Fúria do Berserker",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 65,
+      "crit": 0.25,
+      "critDano": 0.4
+    }
+  },
+  {
+    "id": "vento-da-natureza",
+    "nome": "Vento da Natureza",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 30,
+      "velAtaque": 0.2,
+      "vampFisico": 0.1
+    }
+  },
+  {
+    "id": "cajado-dourado",
+    "nome": "Cajado Dourado",
+    "classe": "Ataque",
+    "stats": {
+      "velAtaque": 0.35
+    }
+  },
+  {
+    "id": "lanca-do-longinus",
+    "nome": "Lança do Longinus",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 70,
+      "penArmFlat": 15
+    }
+  },
+  {
+    "id": "lamina-do-caos",
+    "nome": "Lâmina do Caos",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 75,
+      "crit": 0.2
+    }
+  },
+  {
+    "id": "foice-da-corrosao",
+    "nome": "Foice da Corrosão",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 30,
+      "velAtaque": 0.3
+    }
+  },
+  {
+    "id": "espada-da-furia",
+    "nome": "Espada da Fúria",
+    "classe": "Ataque",
+    "stats": {
+      "ataque": 85
+    }
+  },
+  {
+    "id": "cetro-relampago",
+    "nome": "Cetro Relâmpago",
+    "classe": "Magia",
+    "stats": {
+      "poderMagico": 75
+    }
+  },
+  {
+    "id": "varinha-brilhante",
+    "nome": "Varinha Brilhante",
+    "classe": "Magia",
+    "stats": {
+      "poderMagico": 75,
+      "penMagPct": 0.15
+    }
+  },
+  {
+    "id": "cajado-do-genio",
+    "nome": "Cajado do Gênio",
+    "classe": "Magia",
+    "stats": {
+      "poderMagico": 75,
+      "penMagPct": 0.1
+    }
+  },
+  {
+    "id": "relogio-do-destino",
+    "nome": "Relógio do Destino",
+    "classe": "Magia",
+    "stats": {
+      "poderMagico": 60,
+      "vida": 615,
+      "mana": 600
+    }
+  },
+  {
+    "id": "livro-dos-sabios",
+    "nome": "Livro dos Sábios",
+    "classe": "Magia",
+    "stats": {
+      "poderMagico": 75,
+      "mana": 300
+    }
+  },
+  {
+    "id": "botas-do-arcano",
+    "nome": "Botas do Arcano",
+    "classe": "Magia",
+    "stats": {
+      "penMagFlat": 10
+    }
+  },
+  {
+    "id": "peitoral-brutal",
+    "nome": "Peitoral Brutal",
+    "classe": "Defesa",
+    "stats": {
+      "armadura": 45,
+      "vida": 200
+    }
+  },
+  {
+    "id": "couraca-antiga",
+    "nome": "Couraça Antiga",
+    "classe": "Defesa",
+    "stats": {
+      "armadura": 55,
+      "vida": 400
+    }
+  },
+  {
+    "id": "imortal",
+    "nome": "Imortal",
+    "classe": "Defesa",
+    "stats": {
+      "armadura": 40,
+      "vida": 300
+    }
+  },
+  {
+    "id": "athena",
+    "nome": "Escudo de Athena",
+    "classe": "Defesa",
+    "stats": {
+      "mres": 62,
+      "vida": 400
+    }
+  },
+  {
+    "id": "oraculo",
+    "nome": "Oráculo",
+    "classe": "Defesa",
+    "stats": {
+      "mres": 42,
+      "vida": 250
+    }
+  },
+  {
+    "id": "dominio-do-congelamento",
+    "nome": "Domínio do Congelamento",
+    "classe": "Defesa",
+    "stats": {
+      "armadura": 50,
+      "vida": 200
+    }
+  },
+  {
+    "id": "botas-da-rapidez",
+    "nome": "Botas da Rapidez",
+    "classe": "Movimento",
+    "stats": {}
+  },
+  {
+    "id": "sapatos-misticos",
+    "nome": "Sapatos Místicos",
+    "classe": "Movimento",
+    "stats": {}
+  },
+  {
+    "id": "botas-do-guerreiro",
+    "nome": "Botas do Guerreiro",
+    "classe": "Movimento",
+    "stats": {
+      "armadura": 22
+    }
+  },
+  {
+    "id": "botas-da-resistencia",
+    "nome": "Botas da Resistência",
+    "classe": "Movimento",
+    "stats": {
+      "mres": 22
+    }
+  },
+  {
+    "id": "facas-de-chuva",
+    "nome": "Facas de Chuva",
+    "classe": "Jungle",
+    "stats": {
+      "ataque": 15,
+      "velAtaque": 0.15
+    }
+  },
+  {
+    "id": "facas-sangrentas",
+    "nome": "Facas Sangrentas",
+    "classe": "Jungle",
+    "stats": {
+      "ataque": 20,
+      "vampFisico": 0.08
+    }
+  },
+  {
+    "id": "mascara-do-guardiao",
+    "nome": "Máscara do Guardião",
+    "classe": "Roamer",
+    "stats": {
+      "vida": 300,
+      "armadura": 10,
+      "mres": 10
+    }
+  },
+  {
+    "id": "mascara-do-mago",
+    "nome": "Máscara do Mago",
+    "classe": "Roamer",
+    "stats": {
+      "vida": 250,
+      "poderMagico": 30
+    }
+  }
+]
