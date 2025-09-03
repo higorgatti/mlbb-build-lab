@@ -31,7 +31,7 @@
     h1{font-size:18px; margin:0}
     h2{font-size:16px; margin:0 0 10px 0}
     .searchbar{display:flex; gap:8px; margin:10px 0}
-    .searchbar input, .searchbar select{flex:1; background:var(--chip); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:10px 12px; outline:none}
+    .searchbar select{flex:1; background:var(--chip); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:10px 12px; outline:none}
     .grid{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px}
     @media (max-width:700px){ .grid{grid-template-columns: repeat(2, minmax(0,1fr));} }
     .card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:6px}
@@ -46,7 +46,6 @@
     .slot{background:var(--chip); border:1px dashed var(--border); border-radius:10px; padding:8px; height:70px; display:flex; align-items:center; justify-content:center; color:var(--muted); position:relative}
     .slot.filled{border-style:solid; background:var(--card); color:var(--text)}
     .slot .x{position:absolute; top:6px; right:6px; font-size:12px; cursor:pointer; opacity:.85}
-    .row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
     .stat{display:flex; justify-content:space-between; gap:10px; padding:6px 8px; background:var(--chip); border:1px solid var(--border); border-radius:8px; font-size:13px}
     .stats{display:grid; grid-template-columns: 1fr 1fr; gap:8px}
     .note{font-size:12px; color:var(--muted); margin-top:4px}
@@ -63,9 +62,9 @@
         <div>
           <div style="display:flex; gap:8px; align-items:center;">
             <h1>MLBB Build Lab</h1>
-            <span class="pill">lendo /data/*.json</span>
+            <span class="pill">dados de /data/*.json</span>
           </div>
-          <div class="note">Escolha o herói, adicione itens e veja atributos + DPS aproximado. Dados vêm de <code>data/heroes.json</code> e <code>data/itens.json</code>.</div>
+          <div class="note">Escolha o herói, adicione itens e veja atributos + DPS aproximado.</div>
         </div>
       </div>
       <div class="row">
@@ -79,7 +78,7 @@
         <section>
           <h2>Heróis</h2>
           <div class="searchbar">
-            <input id="hero-search" placeholder="Buscar herói...">
+            <select id="hero-select"></select>
             <select id="hero-filter">
               <option value="todos">Todos os tipos</option>
               <option value="Físico">Físico</option>
@@ -87,7 +86,6 @@
               <option value="Híbrido">Híbrido</option>
             </select>
           </div>
-          <div id="hero-grid" class="grid"></div>
         </section>
 
         <div class="divider"></div>
@@ -95,7 +93,7 @@
         <section>
           <h2>Itens</h2>
           <div class="searchbar">
-            <input id="item-search" placeholder="Buscar item...">
+            <select id="item-select"></select>
             <select id="item-filter">
               <option value="todas">Todas as classes</option>
               <option value="Ataque">Ataque</option>
@@ -106,7 +104,6 @@
               <option value="Roamer">Roamer</option>
             </select>
           </div>
-          <div id="item-grid" class="grid"></div>
         </section>
       </main>
 
@@ -123,22 +120,12 @@
           <div>
             <h2>Resumo de Atributos</h2>
             <div class="stats" id="stats"></div>
-            <div class="note">Cálculo aproximado (passivas complexas ainda não simuladas).</div>
           </div>
 
           <div class="divider"></div>
 
           <div>
             <h2>Simulador de DPS</h2>
-            <div class="row">
-              <label class="small" for="alvo-presets">Alvo:</label>
-              <select id="alvo-presets">
-                <option value="custom">Custom</option>
-                <option value="mago">Mago (leve)</option>
-                <option value="atirador">Atirador (médio)</option>
-                <option value="tanque">Tanque (pesado)</option>
-              </select>
-            </div>
             <div class="row">
               <label class="small">Armadura</label>
               <input id="alvo-armor" type="number" value="40" style="width:90px">
@@ -148,12 +135,6 @@
             <div class="stat"><span>DPS Físico (aprox.)</span><strong id="dps-fis">0</strong></div>
             <div class="stat"><span>DPS Mágico (aprox.)</span><strong id="dps-mag">0</strong></div>
           </div>
-
-          <div class="divider"></div>
-          <div class="footer small">
-            <div>Protótipo educativo. <span class="note">Não afiliado à Moonton.</span></div>
-            <div class="note">Atualize os JSONs em <code>data/</code> para mudar heróis/itens.</div>
-          </div>
         </div>
       </aside>
     </div>
@@ -161,88 +142,29 @@
 
   <script>
   let HEROES=[], ITENS=[];
-  async function loadJSON(path, fallback){ try{ const r=await fetch(path,{cache:'no-store'}); if(!r.ok) throw 0; return await r.json(); }catch(e){ return fallback; } }
-  const FALLBACK_HEROES = [{"id":"irithel","nome":"Irithel","classe":"Atiradora","tipoDano":"Físico","base":{"ataque":120,"poderMagico":0,"velAtaque":0.95,"crit":0,"vampFisico":0}}];
-  const FALLBACK_ITENS = [{"id":"lamina-do-desespero","nome":"Lâmina do Desespero","classe":"Ataque","stats":{"ataque":160}}];
-
   const state={heroId:null, build:[], alvo:{armor:40,mres:40}};
   const el=s=>document.querySelector(s);
-  function formatPct(v){ return Math.round(v*100)+'%'; }
-  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-  function renderHeroes(){
-    const q=el('#hero-search').value.trim().toLowerCase();
-    const f=el('#hero-filter').value;
-    const list=HEROES.filter(h=>(!q||h.nome.toLowerCase().includes(q))&&(f==='todos'||h.tipoDano===f));
-    const grid=el('#hero-grid'); grid.innerHTML='';
-    list.forEach(h=>{
-      const card=document.createElement('div'); card.className='card';
-      card.innerHTML=\`<h3>\${h.nome}</h3><div class="meta">\${h.classe} • \${h.tipoDano}</div><button class="btn btn-accent small">Selecionar</button>\`;
-      card.querySelector('button').onclick=()=>{ state.heroId=h.id; save(); renderBuildHeader(); compute(); window.scrollTo({top:0,behavior:'smooth'}); };
-      grid.appendChild(card);
-    });
-  }
-  function renderItems(){
-    const q=el('#item-search').value.trim().toLowerCase();
-    const f=el('#item-filter').value;
-    const list=ITENS.filter(it=>(!q||it.nome.toLowerCase().includes(q))&&(f==='todas'||it.classe===f));
-    const grid=el('#item-grid'); grid.innerHTML='';
-    list.forEach(it=>{
-      const statsStr=Object.entries(it.stats||{}).map(([k,v])=>{
-        if(typeof v==='number'){ if(k.includes('Pct')||['velAtaque','crit','vampFisico'].includes(k)) return k+': '+formatPct(v); return k+': '+v; }
-        return k+': '+v;
-      }).join(' • ');
-      const card=document.createElement('div'); card.className='card';
-      card.innerHTML=\`<h3>\${it.nome}</h3><div class="meta">\${it.classe}</div><div class="note small">\${statsStr}</div><button class="btn small">Adicionar</button>\`;
-      card.querySelector('button').onclick=()=>{ if(state.build.length>=6){alert('A build já tem 6 itens.');return;} state.build.push(it.id); save(); renderSlots(); compute(); window.scrollTo({top:0,behavior:'smooth'}); };
-      grid.appendChild(card);
-    });
-  }
-  function renderBuildHeader(){ const h=HEROES.find(x=>x.id===state.heroId); el('#build-hero').textContent=h? \`\${h.nome} — \${h.tipoDano}\` : 'Nenhum herói selecionado.'; }
-  function renderSlots(){
-    const slots=el('#slots'); slots.innerHTML='';
-    for(let i=0;i<6;i++){ const id=state.build[i]; const div=document.createElement('div'); div.className='slot'+(id?' filled':''); if(id){ const it=ITENS.find(x=>x.id===id); div.innerHTML=\`<div><strong>\${it?.nome||id}</strong><div class='small note'>\${it?.classe||''}</div></div><div class='x'>✕</div>\`; div.querySelector('.x').onclick=()=>{ state.build.splice(i,1); save(); renderSlots(); compute(); }; } else { div.textContent='Vazio'; } slots.appendChild(div); }
-  }
-  function sumStats(){ const s={ataque:0,poderMagico:0,velAtaque:0,crit:0,critDano:0,vampFisico:0,penArmFlat:0,penArmPct:0,penMagFlat:0,penMagPct:0,vida:0,armadura:0,mres:0,mana:0}; state.build.forEach(id=>{ const it=ITENS.find(x=>x.id===id); if(!it) return; for(const [k,v] of Object.entries(it.stats||{})){ s[k]=(s[k]||0)+(typeof v==='number'?v:0); } }); return s; }
-  function physMult(armor,pp,pf){ const e=Math.max(0, armor*(1-pp)-pf); return 100/(100+e); }
-  function magMult(mres,pp,pf){ const e=Math.max(0, mres*(1-pp)-pf); return 100/(100+e); }
-  function compute(){
-    const stats=el('#stats'); stats.innerHTML='';
-    const h=HEROES.find(x=>x.id===state.heroId);
-    const s=sumStats();
-    const atk=(h?.base?.ataque||0)+(s.ataque||0);
-    const mag=(h?.base?.poderMagico||0)+(s.poderMagico||0);
-    const asM=Math.max(0.2, Math.min(3.0, (h?.base?.velAtaque||0)*(1+(s.velAtaque||0))));
-    const crit=Math.max(0, Math.min(1, (h?.base?.crit||0)+(s.crit||0)));
-    const critD=2.0+(s.critDano||0);
-    const vamp=Math.max(0, Math.min(1, (h?.base?.vampFisico||0)+(s.vampFisico||0)));
-    const rows=[['Ataque Físico',Math.round(atk)],['Poder Mágico',Math.round(mag)],['Velocidade de Ataque',Math.round((asM-1)*100)+'%'],['Crítico',Math.round(crit*100)+'% • x'+critD.toFixed(2)],['Vampirismo Físico',Math.round(vamp*100)+'%'],['Pen. Armadura',(s.penArmFlat||0)+' • '+Math.round((s.penArmPct||0)*100)+'%'],['Pen. Mágica',(s.penMagFlat||0)+' • '+Math.round((s.penMagPct||0)*100)+'%'],['Vida',(s.vida||0)],['Armadura',(s.armadura||0)],['Resist. Mágica',(s.mres||0)],['Mana',(s.mana||0)]];
-    rows.forEach(([k,v])=>{ const row=document.createElement('div'); row.className='stat'; row.innerHTML=`<span>${k}</span><strong>${v}</strong>`; stats.appendChild(row); });
-    const aa=Number(el('#alvo-armor').value)||0; const am=Number(el('#alvo-mres').value)||0;
-    el('#dps-fis').textContent=Math.round(atk*asM*(1+crit*(critD-1))*physMult(aa,s.penArmPct||0,s.penArmFlat||0));
-    el('#dps-mag').textContent=Math.round(mag*1.0*magMult(am,s.penMagPct||0,s.penMagFlat||0));
-  }
-  function save(){ localStorage.setItem('mlbb_build_lab', JSON.stringify({heroId:state.heroId, build:state.build})); }
-  function load(){ try{ const d=JSON.parse(localStorage.getItem('mlbb_build_lab')||'{}'); state.heroId=d.heroId||null; state.build=Array.isArray(d.build)?d.build.filter(Boolean).slice(0,6):[]; }catch(e){} }
-  function exportLink(){ const enc=btoa(unescape(encodeURIComponent(JSON.stringify({h:state.heroId,b:state.build})))); const url=location.origin+location.pathname+'#'+enc; navigator.clipboard.writeText(url).then(()=>alert('Link copiado!'),()=>prompt('Copie o link:', url)); }
+  async function loadJSON(path){ const r=await fetch(path,{cache:'no-store'}); return await r.json(); }
 
-  function applyPreset(){ const v=el('#alvo-presets').value; if(v==='mago'){el('#alvo-armor').value=25;el('#alvo-mres').value=25;} else if(v==='atirador'){el('#alvo-armor').value=40;el('#alvo-mres').value=35;} else if(v==='tanque'){el('#alvo-armor').value=85;el('#alvo-mres').value=70;} compute(); }
-
-  async function init(){
-    load();
-    HEROES=await loadJSON('data/heroes.json', FALLBACK_HEROES);
-    ITENS =await loadJSON('data/itens.json',  FALLBACK_ITENS);
-    renderHeroes(); renderItems(); renderBuildHeader(); renderSlots(); compute();
-    el('#hero-search').addEventListener('input', renderHeroes);
-    el('#hero-filter').addEventListener('change', renderHeroes);
-    el('#item-search').addEventListener('input', renderItems);
-    el('#item-filter').addEventListener('change', renderItems);
-    el('#btn-export').addEventListener('click', exportLink);
-    el('#btn-reset').addEventListener('click', ()=>{ state.build=[]; save(); renderSlots(); compute(); });
-    el('#alvo-presets').addEventListener('change', applyPreset);
-    el('#alvo-armor').addEventListener('input', ()=>compute());
-    el('#alvo-mres').addEventListener('input', ()=>compute());
+  function fillHeroSelect(){
+    const sel=el('#hero-select');
+    sel.innerHTML='<option value="">Selecionar herói…</option>'+HEROES.map(h=>`<option value="${h.id}">${h.nome} — ${h.tipoDano}</option>`).join('');
+    sel.onchange=()=>{ if(!sel.value)return; state.heroId=sel.value; renderBuildHeader(); compute(); };
   }
+
+  function fillItemSelect(){
+    const sel=el('#item-select');
+    sel.innerHTML='<option value="">Adicionar item…</option>'+ITENS.map(it=>`<option value="${it.id}">${it.nome} — ${it.classe}</option>`).join('');
+    sel.onchange=()=>{ if(!sel.value)return; if(state.build.length>=6){alert('A build já tem 6 itens.'); sel.value=''; return;} state.build.push(sel.value); renderSlots(); compute(); sel.value=''; };
+  }
+
+  function renderBuildHeader(){ const h=HEROES.find(x=>x.id===state.heroId); el('#build-hero').textContent=h? `${h.nome} — ${h.tipoDano}` : 'Nenhum herói selecionado.'; }
+  function renderSlots(){ const slots=el('#slots'); slots.innerHTML=''; for(let i=0;i<6;i++){ const id=state.build[i]; const div=document.createElement('div'); div.className='slot'+(id?' filled':''); if(id){ const it=ITENS.find(x=>x.id===id); div.innerHTML=`<div><strong>${it?.nome||id}</strong></div><div class='x'>✕</div>`; div.querySelector('.x').onclick=()=>{ state.build.splice(i,1); renderSlots(); compute(); }; } else { div.textContent='Vazio'; } slots.appendChild(div);} }
+  function sumStats(){ const s={ataque:0,poderMagico:0,velAtaque:0,crit:0}; state.build.forEach(id=>{ const it=ITENS.find(x=>x.id===id); if(!it)return; for(const [k,v] of Object.entries(it.stats||{})){ s[k]=(s[k]||0)+(typeof v==='number'?v:0);} }); return s;}
+  function compute(){ const stats=el('#stats'); stats.innerHTML=''; const h=HEROES.find(x=>x.id===state.heroId); const s=sumStats(); const atk=(h?.base?.ataque||0)+(s.ataque||0); const mag=(h?.base?.poderMagico||0)+(s.poderMagico||0); const aa=Number(el('#alvo-armor').value)||0; const am=Number(el('#alvo-mres').value)||0; el('#dps-fis').textContent=Math.round(atk*(100/(100+aa))); el('#dps-mag').textContent=Math.round(mag*(100/(100+am))); }
+  
+  async function init(){ HEROES=await loadJSON('data/heroes.json'); ITENS=await loadJSON('data/itens.json'); fillHeroSelect(); fillItemSelect(); renderSlots(); renderBuildHeader(); compute(); el('#alvo-armor').addEventListener('input', compute); el('#alvo-mres').addEventListener('input', compute); }
   document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
