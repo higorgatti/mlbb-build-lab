@@ -3,15 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MLBB Build Lab — Protótipo</title>
-  <meta name="description" content="Monte builds de Mobile Legends: Bang Bang e veja os atributos finais de forma rápida.">
+  <title>MLBB Build Lab — Monte e teste suas builds de Mobile Legends</title>
+  <meta name="description" content="Escolha o herói, adicione itens e veja os atributos e um DPS aproximado — tudo direto no navegador.">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MLBB Build Lab — Monte e teste suas builds de Mobile Legends">
+  <meta property="og:description" content="Escolha o herói, adicione itens e veja atributos + DPS aproximado — direto no navegador.">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="MLBB Build Lab — Monte e teste suas builds de Mobile Legends">
+  <meta property="twitter:description" content="Escolha o herói, adicione itens e veja atributos + DPS aproximado — direto no navegador.">
+  <meta property="twitter:image" content="assets/og-image.png">
   <style>
-    :root{
-      --bg:#0f1115; --panel:#151823; --muted:#8b94a7; --text:#e7ecf6; --accent:#6ee7b7; --danger:#f87171;
-      --card:#1b2130; --chip:#232a3b; --border:#2b3348;
-    }
+    :root{ --bg:#0f1115; --panel:#151823; --muted:#8b94a7; --text:#e7ecf6; --accent:#6ee7b7; --danger:#f87171; --card:#1b2130; --chip:#232a3b; --border:#2b3348; }
     *{box-sizing:border-box}
-    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif; line-height:1.4}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, 'Noto Sans', 'Helvetica Neue', sans-serif; line-height:1.4}
     a{color:var(--accent); text-decoration:none}
     .wrap{max-width:1200px; margin:0 auto; padding:16px}
     header{display:flex; gap:12px; align-items:center; justify-content:space-between; padding:12px 0}
@@ -42,13 +49,10 @@
     .row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
     .stat{display:flex; justify-content:space-between; gap:10px; padding:6px 8px; background:var(--chip); border:1px solid var(--border); border-radius:8px; font-size:13px}
     .stats{display:grid; grid-template-columns: 1fr 1fr; gap:8px}
-    .muted{color:var(--muted)}
-    .footer{margin-top:12px; font-size:12px; color:var(--muted)}
     .note{font-size:12px; color:var(--muted); margin-top:4px}
-    .danger{color:var(--danger)}
-    .divider{height:1px; background:var(--border); margin:8px 0}
     .small{font-size:12px}
-    code.small{font-size:12px; background:#0b0e14; padding:2px 6px; border-radius:6px; border:1px solid var(--border)}
+    .divider{height:1px; background:var(--border); margin:8px 0}
+    .footer{margin-top:12px; font-size:12px; color:var(--muted)}
   </style>
 </head>
 <body>
@@ -58,10 +62,10 @@
         <div class="logo">ML</div>
         <div>
           <div style="display:flex; gap:8px; align-items:center;">
-            <h1>MLBB Build Lab — Protótipo</h1>
-            <span class="pill">static / offline</span>
+            <h1>MLBB Build Lab</h1>
+            <span class="pill">lendo /data/*.json</span>
           </div>
-          <div class="muted small">Selecione um herói, adicione até 6 itens e veja o resumo dos atributos e um DPS aproximado.</div>
+          <div class="note">Escolha o herói, adicione itens e veja atributos + DPS aproximado. Dados vêm de <code>data/heroes.json</code> e <code>data/itens.json</code>.</div>
         </div>
       </div>
       <div class="row">
@@ -75,15 +79,15 @@
         <section>
           <h2>Heróis</h2>
           <div class="searchbar">
-            <input id="hero-search" placeholder="Buscar herói... (ex.: Irithel, Eudora, Clint)" aria-label="Buscar herói">
-            <select id="hero-filter" aria-label="Filtrar por tipo de dano">
+            <input id="hero-search" placeholder="Buscar herói...">
+            <select id="hero-filter">
               <option value="todos">Todos os tipos</option>
               <option value="Físico">Físico</option>
               <option value="Mágico">Mágico</option>
               <option value="Híbrido">Híbrido</option>
             </select>
           </div>
-          <div id="hero-grid" class="grid" role="list"></div>
+          <div id="hero-grid" class="grid"></div>
         </section>
 
         <div class="divider"></div>
@@ -91,8 +95,8 @@
         <section>
           <h2>Itens</h2>
           <div class="searchbar">
-            <input id="item-search" placeholder="Buscar item... (ex.: Lâmina do Desespero, Cetro Relâmpago)" aria-label="Buscar item">
-            <select id="item-filter" aria-label="Filtrar por classe">
+            <input id="item-search" placeholder="Buscar item...">
+            <select id="item-filter">
               <option value="todas">Todas as classes</option>
               <option value="Ataque">Ataque</option>
               <option value="Magia">Magia</option>
@@ -102,7 +106,7 @@
               <option value="Roamer">Roamer</option>
             </select>
           </div>
-          <div id="item-grid" class="grid" role="list"></div>
+          <div id="item-grid" class="grid"></div>
         </section>
       </main>
 
@@ -119,7 +123,7 @@
           <div>
             <h2>Resumo de Atributos</h2>
             <div class="stats" id="stats"></div>
-            <div class="note">Cálculo aproximado baseado em atributos base + soma dos itens. Passivas únicas avançadas NÃO estão simuladas ainda.</div>
+            <div class="note">Cálculo aproximado (passivas complexas ainda não simuladas).</div>
           </div>
 
           <div class="divider"></div>
@@ -137,9 +141,9 @@
             </div>
             <div class="row">
               <label class="small">Armadura</label>
-              <input id="alvo-armor" type="number" value="40" style="width:90px" aria-label="Armadura do alvo">
+              <input id="alvo-armor" type="number" value="40" style="width:90px">
               <label class="small">Resist. Mágica</label>
-              <input id="alvo-mres" type="number" value="40" style="width:90px" aria-label="Resistência mágica do alvo">
+              <input id="alvo-mres" type="number" value="40" style="width:90px">
             </div>
             <div class="stat"><span>DPS Físico (aprox.)</span><strong id="dps-fis">0</strong></div>
             <div class="stat"><span>DPS Mágico (aprox.)</span><strong id="dps-mag">0</strong></div>
@@ -147,8 +151,8 @@
 
           <div class="divider"></div>
           <div class="footer small">
-            <div>Protótipo comunitário para fins educativos. <span class="muted">Não afiliado à Moonton.</span></div>
-            <div class="muted">Para nomes oficiais em PT‑BR, atualize o banco de dados (arquivo <code class="small">app.js</code>) quando enviar a lista completa.</div>
+            <div>Protótipo educativo. <span class="note">Não afiliado à Moonton.</span></div>
+            <div class="note">Atualize os JSONs em <code>data/</code> para mudar heróis/itens.</div>
           </div>
         </div>
       </aside>
@@ -156,360 +160,90 @@
   </div>
 
   <script>
-/** =========================
- *   DADOS (exemplos iniciais)
- *   =========================
- *  ⚠️ Nomes e números são placeholders aproximados.
- *  Substitua pelos valores oficiais quando tiver a planilha completa.
- */
+  let HEROES=[], ITENS=[];
+  async function loadJSON(path, fallback){ try{ const r=await fetch(path,{cache:'no-store'}); if(!r.ok) throw 0; return await r.json(); }catch(e){ return fallback; } }
+  const FALLBACK_HEROES = [{"id":"irithel","nome":"Irithel","classe":"Atiradora","tipoDano":"Físico","base":{"ataque":120,"poderMagico":0,"velAtaque":0.95,"crit":0,"vampFisico":0}}];
+  const FALLBACK_ITENS = [{"id":"lamina-do-desespero","nome":"Lâmina do Desespero","classe":"Ataque","stats":{"ataque":160}}];
 
-const HEROES = [
-  {
-    id: "irithel",
-    nome: "Irithel",
-    classe: "Atiradora",
-    tipoDano: "Físico",
-    base: { ataque: 120, poderMagico: 0, velAtaque: 0.95, crit: 0.00, vampFisico: 0.00 },
-  },
-  {
-    id: "eudora",
-    nome: "Eudora",
-    classe: "Maga",
-    tipoDano: "Mágico",
-    base: { ataque: 115, poderMagico: 0, velAtaque: 0.86, crit: 0.00, vampFisico: 0.00 },
-  },
-  {
-    id: "clint",
-    nome: "Clint",
-    classe: "Atirador",
-    tipoDano: "Físico",
-    base: { ataque: 125, poderMagico: 0, velAtaque: 0.90, crit: 0.00, vampFisico: 0.00 },
-  },
-];
+  const state={heroId:null, build:[], alvo:{armor:40,mres:40}};
+  const el=s=>document.querySelector(s);
+  function formatPct(v){ return Math.round(v*100)+'%'; }
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-const ITENS = [
-  // ATAQUE
-  { id:"lamina-do-desespero", nome:"Lâmina do Desespero", classe:"Ataque",
-    stats:{ ataque:160 } },
-  { id:"espada-do-cacador-de-demonios", nome:"Espada do Caçador de Demônios", classe:"Ataque",
-    stats:{ ataque:35, velAtaque:0.25, vampFisico:0.10 } },
-  { id:"furia-do-berserker", nome:"Fúria do Berserker", classe:"Ataque",
-    stats:{ ataque:65, crit:0.25, critDano:0.40 } },
-  { id:"vento-da-natureza", nome:"Vento da Natureza", classe:"Ataque",
-    stats:{ ataque:30, velAtaque:0.20, vampFisico:0.10 } },
-  { id:"cajado-dourado", nome:"Cajado Dourado", classe:"Ataque",
-    stats:{ velAtaque:0.35 } },
-
-  // MAGIA
-  { id:"cetro-relampago", nome:"Cetro Relâmpago", classe:"Magia",
-    stats:{ poderMagico:75 } },
-  { id:"relogio-do-destino", nome:"Relógio do Destino", classe:"Magia",
-    stats:{ poderMagico:60, vida:615, mana:600 } },
-  { id:"varinha-brilhante", nome:"Varinha Brilhante", classe:"Magia",
-    stats:{ poderMagico:75, penMagPct:0.15 } },
-  { id:"cajado-do-genio", nome:"Cajado do Gênio", classe:"Magia",
-    stats:{ poderMagico:75, penMagPct:0.10 } },
-  { id:"botas-do-arcano", nome:"Botas do Arcano", classe:"Magia",
-    stats:{ penMagFlat:10 } },
-
-  // DEFESA (placeholder)
-  { id:"placa-de-aco", nome:"Placa de Aço", classe:"Defesa",
-    stats:{ armadura:35, vida:200 } },
-];
-
-/** =========================
- *   ESTADO
- *   ========================= */
-const state = {
-  heroId: null,
-  build: [], // array de item ids
-  alvo: { armor: 40, mres: 40 }
-};
-
-/** =========================
- *   UI HELPERS
- *   ========================= */
-const el = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-function formatPct(v){ return Math.round(v*100) + "%"; }
-function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
-
-/** =========================
- *   RENDER: HERÓIS
- *   ========================= */
-function renderHeroes(){
-  const q = el("#hero-search").value.trim().toLowerCase();
-  const f = el("#hero-filter").value;
-  const list = HEROES.filter(h => {
-    const matchText = !q || h.nome.toLowerCase().includes(q);
-    const matchType = f === "todos" || h.tipoDano === f;
-    return matchText && matchType;
-  });
-  const grid = el("#hero-grid");
-  grid.innerHTML = "";
-  list.forEach(h => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.setAttribute("role","listitem");
-    card.innerHTML = \`
-      <h3>\${h.nome}</h3>
-      <div class="meta">\${h.classe} • \${h.tipoDano}</div>
-      <button class="btn btn-accent small">Selecionar</button>
-    \`;
-    card.querySelector("button").onclick = () => {
-      state.heroId = h.id;
-      saveLocal();
-      renderBuildHeader();
-      computeAndRender();
-      window.scrollTo({top:0, behavior:"smooth"});
-    };
-    grid.appendChild(card);
-  });
-}
-
-/** =========================
- *   RENDER: ITENS
- *   ========================= */
-function renderItems(){
-  const q = el("#item-search").value.trim().toLowerCase();
-  const f = el("#item-filter").value;
-  const list = ITENS.filter(it => {
-    const matchText = !q || it.nome.toLowerCase().includes(q);
-    const matchClass = f === "todas" || it.classe === f;
-    return matchText && matchClass;
-  });
-  const grid = el("#item-grid");
-  grid.innerHTML = "";
-  list.forEach(it => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.setAttribute("role","listitem");
-    const statsStr = Object.entries(it.stats).map(([k,v])=>{
-      if(typeof v === "number"){
-        if(k.includes("Pct")) return k+": "+formatPct(v);
-        if(["velAtaque","crit","vampFisico"].includes(k)) return k+": "+formatPct(v);
-        return k+": "+v;
-      }
-      return k+": "+v;
-    }).join(" • ");
-    card.innerHTML = \`
-      <h3>\${it.nome}</h3>
-      <div class="meta">\${it.classe}</div>
-      <div class="note small">\${statsStr}</div>
-      <button class="btn small">Adicionar</button>
-    \`;
-    card.querySelector("button").onclick = () => {
-      if(state.build.length >= 6){ alert("A build já tem 6 itens."); return; }
-      state.build.push(it.id);
-      saveLocal();
-      renderSlots();
-      computeAndRender();
-      window.scrollTo({top:0, behavior:"smooth"});
-    };
-    grid.appendChild(card);
-  });
-}
-
-/** =========================
- *   RENDER: BUILD (header + slots)
- *   ========================= */
-function renderBuildHeader(){
-  const box = el("#build-hero");
-  const hero = HEROES.find(h=>h.id===state.heroId);
-  box.textContent = hero ? \`\${hero.nome} — \${hero.tipoDano}\` : "Nenhum herói selecionado.";
-}
-
-function renderSlots(){
-  const slots = el("#slots");
-  slots.innerHTML = "";
-  for(let i=0;i<6;i++){
-    const id = state.build[i];
-    const div = document.createElement("div");
-    div.className = "slot" + (id ? " filled" : "");
-    if(id){
-      const item = ITENS.find(it=>it.id===id);
-      div.innerHTML = \`
-        <div><strong>\${item.nome}</strong><div class="small muted">\${item.classe}</div></div>
-        <div class="x" title="Remover">✕</div>
-      \`;
-      div.querySelector(".x").onclick = ()=>{
-        state.build.splice(i,1);
-        saveLocal();
-        renderSlots();
-        computeAndRender();
-      };
-    }else{
-      div.textContent = "Vazio";
-    }
-    slots.appendChild(div);
+  function renderHeroes(){
+    const q=el('#hero-search').value.trim().toLowerCase();
+    const f=el('#hero-filter').value;
+    const list=HEROES.filter(h=>(!q||h.nome.toLowerCase().includes(q))&&(f==='todos'||h.tipoDano===f));
+    const grid=el('#hero-grid'); grid.innerHTML='';
+    list.forEach(h=>{
+      const card=document.createElement('div'); card.className='card';
+      card.innerHTML=\`<h3>\${h.nome}</h3><div class="meta">\${h.classe} • \${h.tipoDano}</div><button class="btn btn-accent small">Selecionar</button>\`;
+      card.querySelector('button').onclick=()=>{ state.heroId=h.id; save(); renderBuildHeader(); compute(); window.scrollTo({top:0,behavior:'smooth'}); };
+      grid.appendChild(card);
+    });
   }
-}
+  function renderItems(){
+    const q=el('#item-search').value.trim().toLowerCase();
+    const f=el('#item-filter').value;
+    const list=ITENS.filter(it=>(!q||it.nome.toLowerCase().includes(q))&&(f==='todas'||it.classe===f));
+    const grid=el('#item-grid'); grid.innerHTML='';
+    list.forEach(it=>{
+      const statsStr=Object.entries(it.stats||{}).map(([k,v])=>{
+        if(typeof v==='number'){ if(k.includes('Pct')||['velAtaque','crit','vampFisico'].includes(k)) return k+': '+formatPct(v); return k+': '+v; }
+        return k+': '+v;
+      }).join(' • ');
+      const card=document.createElement('div'); card.className='card';
+      card.innerHTML=\`<h3>\${it.nome}</h3><div class="meta">\${it.classe}</div><div class="note small">\${statsStr}</div><button class="btn small">Adicionar</button>\`;
+      card.querySelector('button').onclick=()=>{ if(state.build.length>=6){alert('A build já tem 6 itens.');return;} state.build.push(it.id); save(); renderSlots(); compute(); window.scrollTo({top:0,behavior:'smooth'}); };
+      grid.appendChild(card);
+    });
+  }
+  function renderBuildHeader(){ const h=HEROES.find(x=>x.id===state.heroId); el('#build-hero').textContent=h? \`\${h.nome} — \${h.tipoDano}\` : 'Nenhum herói selecionado.'; }
+  function renderSlots(){
+    const slots=el('#slots'); slots.innerHTML='';
+    for(let i=0;i<6;i++){ const id=state.build[i]; const div=document.createElement('div'); div.className='slot'+(id?' filled':''); if(id){ const it=ITENS.find(x=>x.id===id); div.innerHTML=\`<div><strong>\${it?.nome||id}</strong><div class='small note'>\${it?.classe||''}</div></div><div class='x'>✕</div>\`; div.querySelector('.x').onclick=()=>{ state.build.splice(i,1); save(); renderSlots(); compute(); }; } else { div.textContent='Vazio'; } slots.appendChild(div); }
+  }
+  function sumStats(){ const s={ataque:0,poderMagico:0,velAtaque:0,crit:0,critDano:0,vampFisico:0,penArmFlat:0,penArmPct:0,penMagFlat:0,penMagPct:0,vida:0,armadura:0,mres:0,mana:0}; state.build.forEach(id=>{ const it=ITENS.find(x=>x.id===id); if(!it) return; for(const [k,v] of Object.entries(it.stats||{})){ s[k]=(s[k]||0)+(typeof v==='number'?v:0); } }); return s; }
+  function physMult(armor,pp,pf){ const e=Math.max(0, armor*(1-pp)-pf); return 100/(100+e); }
+  function magMult(mres,pp,pf){ const e=Math.max(0, mres*(1-pp)-pf); return 100/(100+e); }
+  function compute(){
+    const stats=el('#stats'); stats.innerHTML='';
+    const h=HEROES.find(x=>x.id===state.heroId);
+    const s=sumStats();
+    const atk=(h?.base?.ataque||0)+(s.ataque||0);
+    const mag=(h?.base?.poderMagico||0)+(s.poderMagico||0);
+    const asM=Math.max(0.2, Math.min(3.0, (h?.base?.velAtaque||0)*(1+(s.velAtaque||0))));
+    const crit=Math.max(0, Math.min(1, (h?.base?.crit||0)+(s.crit||0)));
+    const critD=2.0+(s.critDano||0);
+    const vamp=Math.max(0, Math.min(1, (h?.base?.vampFisico||0)+(s.vampFisico||0)));
+    const rows=[['Ataque Físico',Math.round(atk)],['Poder Mágico',Math.round(mag)],['Velocidade de Ataque',Math.round((asM-1)*100)+'%'],['Crítico',Math.round(crit*100)+'% • x'+critD.toFixed(2)],['Vampirismo Físico',Math.round(vamp*100)+'%'],['Pen. Armadura',(s.penArmFlat||0)+' • '+Math.round((s.penArmPct||0)*100)+'%'],['Pen. Mágica',(s.penMagFlat||0)+' • '+Math.round((s.penMagPct||0)*100)+'%'],['Vida',(s.vida||0)],['Armadura',(s.armadura||0)],['Resist. Mágica',(s.mres||0)],['Mana',(s.mana||0)]];
+    rows.forEach(([k,v])=>{ const row=document.createElement('div'); row.className='stat'; row.innerHTML=`<span>${k}</span><strong>${v}</strong>`; stats.appendChild(row); });
+    const aa=Number(el('#alvo-armor').value)||0; const am=Number(el('#alvo-mres').value)||0;
+    el('#dps-fis').textContent=Math.round(atk*asM*(1+crit*(critD-1))*physMult(aa,s.penArmPct||0,s.penArmFlat||0));
+    el('#dps-mag').textContent=Math.round(mag*1.0*magMult(am,s.penMagPct||0,s.penMagFlat||0));
+  }
+  function save(){ localStorage.setItem('mlbb_build_lab', JSON.stringify({heroId:state.heroId, build:state.build})); }
+  function load(){ try{ const d=JSON.parse(localStorage.getItem('mlbb_build_lab')||'{}'); state.heroId=d.heroId||null; state.build=Array.isArray(d.build)?d.build.filter(Boolean).slice(0,6):[]; }catch(e){} }
+  function exportLink(){ const enc=btoa(unescape(encodeURIComponent(JSON.stringify({h:state.heroId,b:state.build})))); const url=location.origin+location.pathname+'#'+enc; navigator.clipboard.writeText(url).then(()=>alert('Link copiado!'),()=>prompt('Copie o link:', url)); }
 
-/** =========================
- *   CÁLCULOS
- *   ========================= */
-function sumStats(){
-  const base = { ataque:0, poderMagico:0, velAtaque:0, crit:0, critDano:0, vampFisico:0, penArmFlat:0, penArmPct:0, penMagFlat:0, penMagPct:0, vida:0, armadura:0, mres:0, mana:0 };
-  state.build.forEach(id => {
-    const it = ITENS.find(x=>x.id===id);
-    if(!it) return;
-    for(const [k,v] of Object.entries(it.stats||{})){
-      base[k] = (base[k]||0) + (typeof v === "number" ? v : 0);
-    }
-  });
-  return base;
-}
+  function applyPreset(){ const v=el('#alvo-presets').value; if(v==='mago'){el('#alvo-armor').value=25;el('#alvo-mres').value=25;} else if(v==='atirador'){el('#alvo-armor').value=40;el('#alvo-mres').value=35;} else if(v==='tanque'){el('#alvo-armor').value=85;el('#alvo-mres').value=70;} compute(); }
 
-/** dano físico aproximado vs armadura (modelo genérico) */
-function physMultiplierVsArmor(armor, penPct, penFlat){
-  const eff = Math.max(0, armor*(1 - penPct) - penFlat);
-  // Curva genérica estilo "100 de armadura ~ 50% redução"
-  const mult = 100 / (100 + eff);
-  return mult;
-}
-
-/** dano mágico aproximado vs resistência mágica */
-function magicMultiplierVsRes(mres, penPct, penFlat){
-  const eff = Math.max(0, mres*(1 - penPct) - penFlat);
-  const mult = 100 / (100 + eff);
-  return mult;
-}
-
-function computeAndRender(){
-  const statsBox = el("#stats");
-  statsBox.innerHTML = "";
-  const hero = HEROES.find(h=>h.id===state.heroId);
-  const s = sumStats();
-
-  const baseAtk = (hero?.base.ataque || 0) + (s.ataque || 0);
-  const baseMag = (hero?.base.poderMagico || 0) + (s.poderMagico || 0);
-  const asMult  = clamp( (hero?.base.velAtaque || 0) * (1 + (s.velAtaque || 0)), 0.2, 3.0);
-  const crit    = clamp( (hero?.base.crit || 0) + (s.crit || 0), 0, 1);
-  const critDmg = 2.0 + (s.critDano || 0); // 200% base
-  const vamp    = clamp( (hero?.base.vampFisico || 0) + (s.vampFisico || 0), 0, 1);
-
-  // Render resumo
-  const rows = [
-    ["Ataque Físico", Math.round(baseAtk)],
-    ["Poder Mágico", Math.round(baseMag)],
-    ["Velocidade de Ataque", formatPct(asMult - 1)], // mostrar como bônus total aproximado
-    ["Crítico", formatPct(crit) + " • x" + critDmg.toFixed(2)],
-    ["Vampirismo Físico", formatPct(vamp)],
-    ["Pen. Armadura", (s.penArmFlat||0) + " • " + formatPct(s.penArmPct||0)],
-    ["Pen. Mágica", (s.penMagFlat||0) + " • " + formatPct(s.penMagPct||0)],
-    ["Vida", (s.vida||0)],
-    ["Armadura", (s.armadura||0)],
-    ["Resist. Mágica", (s.mres||0)],
-    ["Mana", (s.mana||0)],
-  ];
-  rows.forEach(([k,v])=>{
-    const row = document.createElement("div");
-    row.className = "stat";
-    row.innerHTML = \`<span>\${k}</span><strong>\${v}</strong>\`;
-    statsBox.appendChild(row);
-  });
-
-  // DPS aproximado (básicos): físicas dependem mais de AS; mágicas: proxy simples
-  const alvoArmor = Number(el("#alvo-armor").value) || 0;
-  const alvoMres = Number(el("#alvo-mres").value) || 0;
-
-  const physMult = physMultiplierVsArmor(alvoArmor, s.penArmPct||0, s.penArmFlat||0);
-  const magicMult = magicMultiplierVsRes(alvoMres, s.penMagPct||0, s.penMagFlat||0);
-
-  const dpsFis = Math.max(0, baseAtk * asMult * (1 + crit*(critDmg - 1)) * physMult);
-  // "DPS mágico" aqui é uma proxy: assume 1.0 golpes/seg de skill equivalentes
-  const dpsMag = Math.max(0, baseMag * 1.0 * magicMult);
-
-  el("#dps-fis").textContent = Math.round(dpsFis);
-  el("#dps-mag").textContent = Math.round(dpsMag);
-}
-
-/** =========================
- *   SHARE / PERSIST
- *   ========================= */
-function saveLocal(){
-  const data = { heroId: state.heroId, build: state.build };
-  localStorage.setItem("mlbb_build_lab", JSON.stringify(data));
-}
-function loadLocal(){
-  try{
-    const raw = localStorage.getItem("mlbb_build_lab");
-    if(!raw) return;
-    const data = JSON.parse(raw);
-    if(data && typeof data === "object"){
-      state.heroId = data.heroId || null;
-      state.build = Array.isArray(data.build) ? data.build.filter(Boolean).slice(0,6) : [];
-    }
-  }catch(e){ /* ignore */ }
-}
-function exportLink(){
-  const payload = { h: state.heroId, b: state.build };
-  const enc = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-  const url = location.origin + location.pathname + "#"+enc;
-  navigator.clipboard.writeText(url).then(()=>{
-    alert("Link copiado para a área de transferência!");
-  }, ()=>{
-    prompt("Copie o link:", url);
-  });
-}
-function importFromHash(){
-  if(!location.hash) return;
-  try{
-    const enc = location.hash.slice(1);
-    const json = decodeURIComponent(escape(atob(enc)));
-    const data = JSON.parse(json);
-    if(data.h) state.heroId = data.h;
-    if(Array.isArray(data.b)) state.build = data.b.filter(Boolean).slice(0,6);
-  }catch(e){ /* ignore */ }
-}
-
-/** =========================
- *   PRESETS DE ALVO
- *   ========================= */
-function applyAlvoPreset(){
-  const sel = el("#alvo-presets").value;
-  if(sel==="mago"){ state.alvo.armor=25; state.alvo.mres=25; }
-  else if(sel==="atirador"){ state.alvo.armor=40; state.alvo.mres=35; }
-  else if(sel==="tanque"){ state.alvo.armor=85; state.alvo.mres=70; }
-  else { /* custom */ return syncAlvoInputs(); }
-  syncAlvoInputs();
-  computeAndRender();
-}
-function syncAlvoInputs(){
-  el("#alvo-armor").value = state.alvo.armor;
-  el("#alvo-mres").value = state.alvo.mres;
-}
-
-/** =========================
- *   INIT
- *   ========================= */
-function init(){
-  importFromHash();
-  loadLocal();
-  renderHeroes();
-  renderItems();
-  renderBuildHeader();
-  renderSlots();
-  syncAlvoInputs();
-  computeAndRender();
-
-  // listeners
-  el("#hero-search").addEventListener("input", renderHeroes);
-  el("#hero-filter").addEventListener("change", renderHeroes);
-  el("#item-search").addEventListener("input", renderItems);
-  el("#item-filter").addEventListener("change", renderItems);
-  el("#btn-export").addEventListener("click", exportLink);
-  el("#btn-reset").addEventListener("click", () => {
-    state.build = []; saveLocal(); renderSlots(); computeAndRender();
-  });
-
-  el("#alvo-presets").addEventListener("change", applyAlvoPreset);
-  el("#alvo-armor").addEventListener("input", e=>{ state.alvo.armor = Number(e.target.value)||0; computeAndRender(); });
-  el("#alvo-mres").addEventListener("input", e=>{ state.alvo.mres = Number(e.target.value)||0; computeAndRender(); });
-}
-
-document.addEventListener("DOMContentLoaded", init);
+  async function init(){
+    load();
+    HEROES=await loadJSON('data/heroes.json', FALLBACK_HEROES);
+    ITENS =await loadJSON('data/itens.json',  FALLBACK_ITENS);
+    renderHeroes(); renderItems(); renderBuildHeader(); renderSlots(); compute();
+    el('#hero-search').addEventListener('input', renderHeroes);
+    el('#hero-filter').addEventListener('change', renderHeroes);
+    el('#item-search').addEventListener('input', renderItems);
+    el('#item-filter').addEventListener('change', renderItems);
+    el('#btn-export').addEventListener('click', exportLink);
+    el('#btn-reset').addEventListener('click', ()=>{ state.build=[]; save(); renderSlots(); compute(); });
+    el('#alvo-presets').addEventListener('change', applyPreset);
+    el('#alvo-armor').addEventListener('input', ()=>compute());
+    el('#alvo-mres').addEventListener('input', ()=>compute());
+  }
+  document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
